@@ -117,7 +117,7 @@ footer a{color:var(--blue);text-decoration:none;direction:ltr;unicode-bidi:embed
 <div class="fb" id="fb1"></div></div>
 <div id="q2"></div><div id="q3"></div>
 
-<div class="card" id="t3x"><div class="qhead"><div class="qnum">3</div><div><div class="qtext">برّروا بجملة: لماذا تحتاج أشعة جاما إلى تدريع أسمك وأكثف؟</div><div class="tags"><span class="chip hots">تفسير · تفكير عليا</span></div></div></div>
+<div class="card" id="t3x"><div class="qhead"><div class="qnum">3</div><div><div class="qtext">اكتبوا جملة واحدة تفسّرون فيها: لماذا نحتاج إلى حاجز أسمك وأكثف (كالرصاص أو الخرسانة) لإيقاف أشعة جاما، بينما يكفي لإيقاف ألفا حاجز رقيق؟</div><div class="tags"><span class="chip hots">تفسير · تفكير عليا</span></div></div></div>
 <textarea id="just" placeholder="اكتبوا تبريركم هنا…"></textarea>
 <button class="btn ghost small" id="mb" type="button" style="margin-top:10px">إظهار الإجابة النموذجية</button>
 <div class="model" id="mm">أشعة جاما موجات كهرومغناطيسية عالية الطاقة بلا كتلة ولا شحنة، فتنفذ عبر معظم المواد. لذلك لا يكفي لتقليلها إلا حاجز سميك وكثيف مثل الرصاص أو الخرسانة، وحتى هذا يُضعفها ولا يوقفها تمامًا.</div></div>
@@ -190,7 +190,7 @@ sel.forEach(function(s){s.onchange=function(){if(s.disabled)return;var ok=s.valu
   if(ok1===3){var f=$('#fb1');f.className='fb show good';f.innerHTML='X ألفا لأنها تنحرف نحو السالبة وتتوقف بالورقة. Y بيتا لأنها تنحرف نحو الموجبة وتتوقف بالألومنيوم. Z جاما لأنها لا تنحرف وتنفذ بسهولة.'}}else{setTimeout(function(){s.classList.remove('no');s.value=''},900)}}});
 /* task 2, 3 */
 $('#q2').appendChild(buildMCQ({t:'اختاروا الحاجز المناسب لتقليل اختراق مصدر بيتا.',opts:['ورقة رقيقة فقط','لوح ألومنيوم مناسب','لا يمكن تقليلها'],a:1,why:'بيتا تمر عبر الورقة، لكن لوح الألومنيوم يمتص معظمها.',tags:['اختيار الحاجز · تقويم']},2,{onAnswer:function(ok){if(ok)add('t2',1);else done.t2=1}}));
-$('#q3').appendChild(buildMCQ({t:'لم ينحرف المصدر Z في المجال الكهربائي. ماذا نستنتج؟',opts:['أنه لا يحمل شحنة كهربائية','أنه يحمل شحنة موجبة','أنه يحمل شحنة سالبة'],a:0,why:'المجال الكهربائي يؤثر في الجسيمات المشحونة فقط، وعدم الانحراف يدل على التعادل الكهربائي.',tags:['استنتاج · تفكير عليا']},3,{onAnswer:function(ok){if(ok)add('t3',1);else done.t3=1}}));
+$('#q3').appendChild(buildMCQ({t:'وُضع المصدر Z بين لوحين مشحونين، فلم ينحرف الإشعاع نحو أيّ منهما. ماذا نستنتج عن شحنته؟',opts:['أنه لا يحمل شحنة كهربائية','أنه يحمل شحنة موجبة','أنه يحمل شحنة سالبة'],a:0,why:'المجال الكهربائي يؤثر في الجسيمات المشحونة فقط، وعدم الانحراف يدل على التعادل الكهربائي.',tags:['استنتاج · تفكير عليا']},3,{onAnswer:function(ok){if(ok)add('t3',1);else done.t3=1}}));
 $('#t3x .qnum').textContent='3ب';$('#q3 .qnum').textContent='3أ';
 $('#mb').onclick=function(){$('#mm').classList.toggle('show')};
 /* task 4 */
