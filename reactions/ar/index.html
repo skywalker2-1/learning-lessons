@@ -28,7 +28,7 @@ h2{font-size:23px;color:var(--navy);margin:16px 0 4px}
 footer{text-align:center;color:#6B7A90;font-size:15px;margin-top:26px;border-top:2px solid var(--line);padding-top:12px}footer b{color:var(--blue)}
 @media(max-width:560px){header h1{font-size:21px}}
 .wm{font-weight:800;color:#1F5FBF;font-size:19px;white-space:nowrap;padding-left:12px;border-left:3px solid #1F5FBF;line-height:1.2}</style></head><body><div class="wrap">
-<header><span class="wm">أكاديمية فوزية</span><h1>نماذج الواقع المعزز<small>التفاعلات والمعادلات · التوزيع الإلكتروني وإعادة ترتيب الذرات</small></h1></header>
+<header><span class="wm">أكاديمية فوزية</span><h1>نماذج الواقع المعزز<small>التفاعلات والمعادلات الكيميائية · إعادة ترتيب الذرات</small></h1></header>
 <noscript><div class="note">هذه الصفحة تفاعلية وتحتاج JavaScript. افتح الرابط في Safari أو Chrome مباشرة.</div></noscript>
 <div class="note">افتح الصفحة في <b>Safari</b> (آيباد/آيفون) أو <b>Chrome</b> (أندرويد)، وليس داخل واتساب أو تيليجرام. إصبع واحد للتدوير وإصبعان للتكبير. زر «عرض النموذج على الطاولة» يفتح الواقع المعزز إن كان جهازك يدعمه، وإلا يعمل النموذج على الشاشة.</div>
 <div class="tabs" id="tabs"></div><div class="sub" id="sub"></div>
@@ -1138,29 +1138,41 @@ var Dx=function(t,e,i,n){for(var r,s=arguments.length,a=s<3?e:null===n?n=Object.
 (function(){
 function $(i){return document.getElementById(i)}function L(t){return '<span class="ltr">'+t+'</span>'}
 function cfg(s){return s.replace(/(\d[spdf])(\d+)/g,'$1<sup>$2</sup>')}
-var SRC={"li": "models/li.glb", "ne": "models/ne.glb", "cl": "models/cl.glb", "mg": "models/mg.glb", "rxn": "models/rxn.glb"};
-var LG={atom:'<span><i style="background:#E04A4A"></i>بروتون</span><span><i style="background:#8A94A6"></i>نيوترون</span><span><i style="background:#2F7FE0"></i>إلكترون</span>',
- rx:'<span><i style="background:#D63B3B"></i>أكسجين</span><span><i style="background:#6F8FCB"></i>هيدروجين</span>'};
-var EL={li:{s:'Li',n:'ليثيوم',z:3,sh:'2 ، 1',c:'1s2 2s1',out:1},ne:{s:'Ne',n:'نيون',z:10,sh:'2 ، 8',c:'1s2 2s2 2p6',out:8},cl:{s:'Cl',n:'كلور',z:17,sh:'2 ، 8 ، 7',c:'1s2 2s2 2p6 3s2 3p5',out:7},mg:{s:'Mg',n:'مغنيسيوم',z:12,sh:'2 ، 8 ، 2',c:'1s2 2s2 2p6 3s2',out:2}};
-var Q={
- li:[['كم إلكترونًا في المستوى الرئيس الأول وكم في الثاني؟','2 في الأول و1 في الثاني.'],['اكتب التوزيع الإلكتروني لذرة الليثيوم (العدد الذري 3).','<span class="ltr">1s<sup>2</sup> 2s<sup>1</sup></span>'],['في أي مستوى فرعي يوجد الإلكترون الأخير؟','في المستوى الفرعي <span class="ltr">2s</span>.']],
- ne:[['ما أقصى عدد من الإلكترونات يتسع له المستوى الرئيس الثاني؟','8 إلكترونات، لأن <span class="ltr">e = 2n<sup>2</sup> = 2×2<sup>2</sup> = 8</span>.'],['هل المستوى الثاني ممتلئ في ذرة النيون؟ علّل.','نعم، فيه 8 إلكترونات (2 في <span class="ltr">2s</span> و6 في <span class="ltr">2p</span>) وهو أقصى سعته.'],['اكتب التوزيع الإلكتروني للنيون (العدد الذري 10).','<span class="ltr">1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup></span>']],
- cl:[['كم مستوى رئيسًا مشغولًا بالإلكترونات في ذرة الكلور؟','ثلاثة مستويات: 2 ، 8 ، 7.'],['كم إلكترونًا في مستوى الطاقة الأخير؟','7 إلكترونات: <span class="ltr">3s<sup>2</sup> 3p<sup>5</sup></span>.'],['اكتب التوزيع الإلكتروني الكامل للكلور (العدد الذري 17).','<span class="ltr">1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>5</sup></span>']],
- mg:[['كم إلكترونًا في ذرة المغنيسيوم المتعادلة؟','12 إلكترونًا، لأن العدد الذري 12 والذرة متعادلة.'],['اكتب توزيعه الإلكتروني.','<span class="ltr">1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup></span>'],['كم إلكترونًا في المستوى الفرعي الأخير؟','إلكترونان في <span class="ltr">3s</span>، وهو أقصى سعة للمستوى الفرعي s.']],
- rx:[['قارن عدد ذرات الهيدروجين وذرات الأكسجين قبل التفاعل وبعده.','لم يتغير: 4 ذرات هيدروجين و2 ذرتا أكسجين قبل التفاعل وبعده. الذرات لا تفنى ولا تُستحدث.'],['ما الذي تغيّر خلال التفاعل؟','تفككت الروابط القديمة وتكوّنت روابط جديدة، أي أُعيد ترتيب الذرات فتكوّنت مادة جديدة (الماء).'],['كيف نعرف في المختبر أن تفاعلًا كيميائيًا قد حدث؟','من مؤشراته: تغيّر درجة الحرارة، أو تغيّر اللون، أو الرائحة، أو تصاعد غاز، أو تكوّن مادة صلبة.']]};
-var T={
- at:{label:'الذرات والتوزيع الإلكتروني',leg:'atom',items:[{l:'Li',k:'li',e:'li'},{l:'Ne',k:'ne',e:'ne'},{l:'Cl',k:'cl',e:'cl'},{l:'Mg',k:'mg',e:'mg'}]},
- rx:{label:'إعادة ترتيب الذرات في التفاعل',leg:'rx',items:[{k:'rxn',how:'تفاعل الهيدروجين مع الأكسجين: الذرات نفسها تفترق عن شركائها القدامى وتتّحد بشركاء جدد فتتكوّن مادة جديدة هي الماء. عدد الذرات ثابت، والترتيب هو الذي يتغيّر.',q:Q.rx}]}
-};
-var KEYS=['rx','at'],ck='rx',ci=0;
+var SRC={"rxn": "models/rxn.glb", "ch4": "models/ch4.glb", "mgo": "models/mgo.glb", "h2o2": "models/h2o2.glb"};
+var LG={rx:'<span><i style="background:#D63B3B"></i>أكسجين</span><span><i style="background:#6F8FCB"></i>هيدروجين</span><span><i style="background:#3A465E"></i>كربون</span><span><i style="background:#9AA3B5"></i>مغنيسيوم</span>'};
+function mq(a,b,c){return [a,b,c]}
+var R=[
+ {l:'H₂ + O₂',k:'rxn',eq:'2H<sub>2</sub> + O<sub>2</sub> → 2H<sub>2</sub>O',nm:'تكوّن الماء',ind:'انطلاق طاقة (حرارة) وتكوّن مادة جديدة',at:'أربع ذرات من H وذرتان من O',
+  how:'يتفاعل الهيدروجين مع الأكسجين: الروابط القديمة بين H–H وO=O تتفكك، وتتكوّن روابط جديدة بين H وO فتنتج مادة جديدة هي الماء. عدد كل نوع من الذرات ثابت، والترتيب هو الذي يتغيّر.',
+  q:[['قارن عدد ذرات الهيدروجين وذرات الأكسجين قبل التفاعل وبعده.','لم يتغير: أربع ذرات هيدروجين وذرتا أكسجين قبل التفاعل وبعده. الذرات لا تفنى ولا تُستحدث.'],
+     ['ما الذي تغيّر خلال التفاعل؟','تفككت الروابط القديمة وتكوّنت روابط جديدة، فصارت المواد الناتجة مختلفة في خواصها عن المواد المتفاعلة.'],
+     ['أي مؤشر من مؤشرات حدوث التفاعل الكيميائي يظهر هنا؟','انطلاق طاقة على هيئة حرارة، وتكوّن مادة جديدة (الماء) تختلف في خواصها عن الغازين المتفاعلين.']]},
+ {l:'CH₄ + O₂',k:'ch4',eq:'CH<sub>4</sub> + 2O<sub>2</sub> → CO<sub>2</sub> + 2H<sub>2</sub>O',nm:'احتراق الميثان',ind:'حرارة وضوء (لهب) وتكوّن غاز',at:'ذرة من C وأربع ذرات من H وأربع من O',
+  how:'احتراق غاز الميثان في الأكسجين: ترتبط ذرة الكربون بذرتي أكسجين لتكوّن ثاني أكسيد الكربون، وترتبط ذرات الهيدروجين الأربع بالأكسجين لتكوّن جزيئين من الماء. الذرات نفسها أُعيد ترتيبها فقط.',
+  q:[['احسب عدد ذرات كل عنصر (C وH وO) قبل التفاعل وبعده.','العدد متساوٍ قبل التفاعل وبعده: ذرة من C وأربع من H وأربع من O، فالمعادلة موزونة.'],
+     ['أي مؤشرات حدوث التفاعل تلاحظها عند احتراق الميثان؟','انبعاث حرارة وضوء (لهب)، وتكوّن غاز ثاني أكسيد الكربون وبخار الماء.'],
+     ['هل ما حدث تغير فيزيائي أم كيميائي؟ علّل.','تغير كيميائي، لأن مواد جديدة (CO₂ وH₂O) تكوّنت وتختلف في خواصها عن الميثان والأكسجين.']]},
+ {l:'Mg + O₂',k:'mgo',eq:'2Mg + O<sub>2</sub> → 2MgO',nm:'احتراق المغنيسيوم',ind:'ضوء أبيض ساطع وحرارة وتكوّن مادة صلبة بيضاء',at:'ذرتان من Mg وذرتان من O',
+  how:'يحترق شريط المغنيسيوم في الأكسجين بضوء أبيض ساطع. ترتبط كل ذرة مغنيسيوم بذرة أكسجين وتنتج مادة صلبة بيضاء هي أكسيد المغنيسيوم، وهي تختلف تمامًا عن فلز المغنيسيوم اللامع وعن غاز الأكسجين.',
+  q:[['كم ذرة مغنيسيوم وكم ذرة أكسجين قبل التفاعل وبعده؟','ذرتان من Mg وذرتان من O قبل التفاعل وبعده، فالعدد ثابت.'],
+     ['ما المؤشرات التي تدل على حدوث تفاعل كيميائي هنا؟','ظهور ضوء أبيض ساطع، وانبعاث حرارة، وتكوّن مادة صلبة بيضاء جديدة.'],
+     ['كيف اختلفت المادة الناتجة عن المتفاعلات؟','المتفاعلات: فلز لامع وغاز لا لون له. الناتج: مسحوق أبيض صلب، أي مادة جديدة بخواص جديدة.']]},
+ {l:'H₂O₂',k:'h2o',eq:'2H<sub>2</sub>O<sub>2</sub> → 2H<sub>2</sub>O + O<sub>2</sub>',nm:'تفكك فوق أكسيد الهيدروجين',ind:'انطلاق غاز (فقاعات)',at:'أربع ذرات من H وأربع من O',
+  how:'يتفكك فوق أكسيد الهيدروجين إلى ماء وغاز أكسجين. تنفصل ذرتا أكسجين من كل جزيء وتتّحدان معًا، فيتصاعد غاز الأكسجين على هيئة فقاعات، بينما تبقى بقية الذرات في جزيئات الماء.',
+  q:[['قارن عدد الذرات قبل التفاعل وبعده.','العدد ثابت: أربع ذرات هيدروجين وأربع ذرات أكسجين قبل التفاعل وبعده (في جزيئين من الماء وجزيء أكسجين).'],
+     ['ما المؤشر الذي يدل على حدوث التفاعل؟','انطلاق غاز (فقاعات الأكسجين) وتكوّن مواد جديدة.'],
+     ['ما الذي تغيّر في ارتباط ذرات الأكسجين؟','في المتفاعل كل ذرة أكسجين مرتبطة بذرة هيدروجين وبذرة أكسجين أخرى، وفي الناتج ارتبطت ذرتان منها معًا لتكوّنا جزيء O₂ وارتبطت البقية بالهيدروجين في الماء.']]}
+];
+R[3].k='h2o2';
+var T={rx:{label:'التفاعلات الكيميائية',leg:'rx',items:R}};
+var KEYS=['rx'],ck='rx',ci=0;
 function tabs(){$('tabs').innerHTML='';KEYS.forEach(function(k){var b=document.createElement('button');b.innerHTML=T[k].label;b.className=k===ck?'on':'';b.onclick=function(){ck=k;ci=0;render()};$('tabs').appendChild(b)})}
 function render(){tabs();var t=T[ck],it=t.items[ci];$('sub').innerHTML='';
  if(t.items.length>1)t.items.forEach(function(x,i){var b=document.createElement('button');b.innerHTML='<span class="ltr">'+x.l+'</span>';b.className=i===ci?'on':'';b.onclick=function(){ci=i;render()};$('sub').appendChild(b)});
- var mv=$('mv');mv.src=SRC[it.k];var cam={li:'0deg 70deg 0.42m',ne:'0deg 70deg 0.5m',cl:'0deg 70deg 0.62m',mg:'0deg 70deg 0.55m',rxn:'0deg 80deg 0.7m'};mv.cameraOrbit=cam[it.k]||'0deg 72deg 0.6m';try{mv.jumpCameraToGoal()}catch(e){}
- var inf=$('info'),qs=it.q;
- if(it.e){var e=EL[it.e];qs=Q[it.e];inf.style.display='grid';inf.innerHTML='<div><small>الرمز</small><b class="ltr">'+e.s+'</b></div><div><small>الاسم</small><b>'+e.n+'</b></div><div><small>العدد الذري (البروتونات)</small><b>'+e.z+'</b></div><div><small>الإلكترونات في المستويات</small><b>'+e.sh+'</b></div><div style="grid-column:1/-1"><small>التوزيع الإلكتروني</small><b class="ltr">'+cfg(e.c)+'</b></div>';
-  $('how').innerHTML='ذرة '+e.n+' ('+L(e.s)+') بنموذج بور المبسّط: '+e.z+(e.z<=10?' بروتونات':' بروتونًا')+' في النواة و'+e.z+(e.z<=10?' إلكترونات':' إلكترونًا')+' تدور في المستويات الرئيسة. اعدّ الإلكترونات في كل مستوى ثم اربطها بالتوزيع الإلكتروني.'}
- else{inf.style.display='none';inf.innerHTML='';$('how').innerHTML=it.how}
+ var mv=$('mv');mv.src=SRC[it.k];var cam={rxn:'0deg 80deg 0.7m',ch4:'0deg 80deg 0.75m',mgo:'0deg 80deg 0.6m',h2o2:'0deg 80deg 0.75m'};mv.cameraOrbit=cam[it.k]||'0deg 72deg 0.6m';try{mv.jumpCameraToGoal()}catch(e){}
+ var inf=$('info'),qs=it.q;inf.style.display='grid';
+ inf.innerHTML='<div style="grid-column:1/-1"><small>المعادلة</small><b class="ltr">'+it.eq+'</b></div><div><small>التفاعل</small><b>'+it.nm+'</b></div><div><small>عدد الذرات (ثابت)</small><b>'+it.at+'</b></div><div style="grid-column:1/-1"><small>مؤشر حدوث التفاعل</small><b>'+it.ind+'</b></div>';
+ $('how').innerHTML=it.how;
  $('lg').innerHTML=LG[t.leg];
  var h='';qs.forEach(function(q,i){h+='<div class="qa"><div class="q">'+(i+1)+'. '+q[0]+'</div><textarea aria-label="إجابتك" placeholder="اكتب ملاحظتك…"></textarea><button class="btn" data-a="a'+i+'">إظهار الإجابة</button><div class="ans" id="a'+i+'">'+q[1]+'</div></div>'});$('qs').innerHTML=h;
  var bs=$('qs').querySelectorAll('[data-a]');for(var i=0;i<bs.length;i++)(function(b){b.onclick=function(){$(b.getAttribute('data-a')).classList.toggle('show')}})(bs[i]);
