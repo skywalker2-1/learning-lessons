@@ -39,7 +39,7 @@ footer{text-align:center;color:#6B7A90;font-size:15px;margin-top:26px;border-top
 <div class="how" id="how"></div>
 <div class="note" style="margin:8px 0">نماذج تعليمية مبسّطة: الأحجام والمسافات والحركة لتوضيح الفكرة وليست مقاييس حقيقية، وتتكرر الحركة كل 6 ثوانٍ تقريبًا.</div>
 <h2>مهام الاستكشاف</h2><div id="qs"></div>
-<footer>ملكية خاصة لأكاديمية فوزية · <b>@fawziaacademy</b></footer></div>
+<footer>ملكية خاصة لأكاديمية فوزية · <b class="ltr">@fawziaacademy</b></footer></div>
 <script type="module">/**
  * @license
  * Copyright 2017 Google LLC
@@ -1152,7 +1152,7 @@ var T={
  at:{label:'الذرات والتوزيع الإلكتروني',leg:'atom',items:[{l:'Li',k:'li',e:'li'},{l:'Ne',k:'ne',e:'ne'},{l:'Cl',k:'cl',e:'cl'},{l:'Mg',k:'mg',e:'mg'}]},
  rx:{label:'إعادة ترتيب الذرات في التفاعل',leg:'rx',items:[{k:'rxn',how:'تفاعل الهيدروجين مع الأكسجين: الذرات نفسها تفترق عن شركائها القدامى وتتّحد بشركاء جدد فتتكوّن مادة جديدة هي الماء. عدد الذرات ثابت، والترتيب هو الذي يتغيّر.',q:Q.rx}]}
 };
-var KEYS=['at','rx'],ck='at',ci=0;
+var KEYS=['rx','at'],ck='rx',ci=0;
 function tabs(){$('tabs').innerHTML='';KEYS.forEach(function(k){var b=document.createElement('button');b.innerHTML=T[k].label;b.className=k===ck?'on':'';b.onclick=function(){ck=k;ci=0;render()};$('tabs').appendChild(b)})}
 function render(){tabs();var t=T[ck],it=t.items[ci];$('sub').innerHTML='';
  if(t.items.length>1)t.items.forEach(function(x,i){var b=document.createElement('button');b.innerHTML='<span class="ltr">'+x.l+'</span>';b.className=i===ci?'on':'';b.onclick=function(){ci=i;render()};$('sub').appendChild(b)});
