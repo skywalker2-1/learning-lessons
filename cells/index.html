@@ -55,7 +55,7 @@ footer b{color:var(--blue)}
 .slots{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 .slots span{flex:1 1 90px;min-height:50px;border:3px dashed var(--line);border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--navy);padding:4px;text-align:center;line-height:1.2}
 .slots span.f{border-style:solid;border-color:var(--ok);background:var(--ok);color:#fff}
-.res{text-align:center}.res .big{font-size:56px}
+textarea{width:100%;min-height:70px;border:2px solid var(--line);border-radius:14px;padding:10px;font:500 19px Tajawal,Arial;margin:6px 0 12px}label{font-weight:800;color:var(--navy);display:block}.res{text-align:center}.res .big{font-size:56px}
 </style></head><body><div class="wrap">
 <header><span class="wm">أكاديمية فوزية</span><h1>أنشطة درس نظرية الخلية<small>الصف السادس الابتدائي · العلوم · الوحدة الأولى</small></h1></header>
 <noscript><div class="card">هذه الصفحة تفاعلية وتحتاج JavaScript. افتح الرابط في Safari أو Chrome.</div></noscript>
@@ -72,6 +72,17 @@ footer b{color:var(--blue)}
 <div class="stat"><span>المطابقات: <b id="m_ok">0</b> / 4</span></div>
 <div class="cols"><div class="col" id="m_a"></div><div class="col" id="m_b"></div></div>
 <div class="fb" id="m_f"></div><button class="btn" id="m_re">إعادة</button></div>
+
+<div class="card"><div class="h2">صنّفي: وحيد الخلية أم متعدد الخلايا؟</div>
+<p>اضغطي على المخلوق ثم على المجموعة المناسبة.</p>
+<div class="stat"><span>التصنيف الصحيح: <b id="s_ok">0</b> / 6</span></div>
+<div class="ord" id="s_items"></div>
+<div class="cols"><button class="tile" id="s_u" style="font-size:20px;min-height:70px">وحيد الخلية</button><button class="tile" id="s_m" style="font-size:20px;min-height:70px">متعدد الخلايا</button></div>
+<div class="fb" id="s_f"></div><button class="btn" id="s_re">إعادة</button></div>
+
+<div class="card"><div class="h2">نماذج الواقع المعزز (إثراء)</div>
+<p>شاهدي الخلية الحيوانية والنباتية والنسيج والفولفوكس بالأبعاد الثلاثة.</p>
+<a class="btn p" href="ar/" style="display:inline-block;text-decoration:none;line-height:48px">افتحي النماذج</a></div>
 </section>
 
 <section id="exit">
@@ -81,6 +92,11 @@ footer b{color:var(--blue)}
 <div class="q" id="x_q"></div><div class="opts" id="x_o"></div><div class="fb" id="x_f"></div>
 <button class="btn p" id="x_next" style="display:none">التالي</button>
 <div class="res" id="x_res" style="display:none"></div></div>
+<div class="card"><div class="h2">أجيبي في سطر واحد</div>
+<p>اكتبي إجاباتك هنا ثم أريها لمعلمتك. لا تُحفظ الإجابات في أي مكان.</p>
+<label>١. أهم معلومة تعلمتها اليوم</label><textarea aria-label="أهم معلومة"></textarea>
+<label>٢. سؤال ما زال لدي</label><textarea aria-label="سؤال لدي"></textarea>
+<label>٣. مثال على خلية في جسم الإنسان</label><textarea aria-label="مثال على خلية"></textarea></div>
 </section>
 
 <footer>أكاديمية فوزية | <b dir="ltr" style="unicode-bidi:isolate;display:inline-block">@fawziaacademy</b><br>ملكية خاصة لأكاديمية فوزية</footer>
@@ -120,6 +136,15 @@ function mTap(d){if(d.className.indexOf('done')>-1)return;
   if(mok===4){$('m_f').className='fb g';$('m_f').textContent='ممتاز! طابقتِ الأنسجة كلها.'}}
  else{var s=sel;s.className='tile';d.className='tile bad';setTimeout(function(){if(d.className.indexOf('done')<0)d.className='tile'},450);sel=null;$('m_f').className='fb r';$('m_f').textContent='حاولي مرة أخرى.'}}
 $('m_re').onclick=mInit;mInit();
+
+
+/* sorting */
+var SI=[['براميسيوم','u'],['أميبا','u'],['بكتيريا','u'],['الإنسان','m'],['شجرة','m'],['سمكة','m']],ss=null,sok;
+function sInit(){sok=0;ss=null;$('s_ok').textContent=0;$('s_f').className='fb';$('s_f').textContent='';var t=$('s_items');t.innerHTML='';
+ shuf(SI).forEach(function(it){var b=document.createElement('button');b.className='tile';b.style.fontSize='20px';b.textContent=it[0];b._k=it[1];b.onclick=function(){if(b.className.indexOf('done')>-1)return;if(ss)ss.className='tile';ss=b;b.className='tile sel'};t.appendChild(b)})}
+function sBin(k){if(!ss)return;if(ss._k===k){ss.className='tile done';ss=null;sok++;$('s_ok').textContent=sok;$('s_f').className='fb';$('s_f').textContent='';if(sok===6){$('s_f').className='fb g';$('s_f').textContent='أحسنتِ! صنّفتِ المخلوقات كلها.'}}
+ else{var b=ss;b.className='tile bad';setTimeout(function(){if(b.className.indexOf('done')<0)b.className='tile'},450);ss=null;$('s_f').className='fb r';$('s_f').textContent='فكّري: كم خلية في جسم هذا المخلوق؟'}}
+$('s_u').onclick=function(){sBin('u')};$('s_m').onclick=function(){sBin('m')};$('s_re').onclick=sInit;sInit();
 
 /* exit ticket */
 var QS=[['ماذا تنصّ نظرية الخلية؟',['المخلوقات الحية تتكوّن من خلية أو أكثر','الخلايا لا تنتج إلا من الماء','الخلايا موجودة في الإنسان فقط'],0],
