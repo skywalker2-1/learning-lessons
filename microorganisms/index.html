@@ -146,18 +146,18 @@ $('nav').addEventListener('click',function(e){var t=e.target.getAttribute&&e.tar
 window.addEventListener('hashchange',tab);tab();
 
 /* ordering */
-var LV=['تنسخ الخلية البكتيرية مادتها الوراثية فتصبح نسختين','تستطيل الخلية ويتكوّن جدار فاصل في وسطها','تنقسم الخلية إلى قسمين','ينتج عن ذلك خليتان جديدتان متطابقتان'],oi;
+var LV=['تتضاعف المادة الوراثية','تبدأ الخلية في الانقسام','ينتج مخلوقان متماثلان'],oi;
 function oInit(){oi=0;$('o_f').className='fb';$('o_f').textContent='';
  var s=$('o_slots');s.innerHTML='';LV.forEach(function(_,i){var x=document.createElement('span');x.textContent=i+1;s.appendChild(x)});
  var t=$('o_tiles');t.innerHTML='';shuf(LV).forEach(function(n){var b=document.createElement('button');b.className='tile';b.textContent=n;b.onclick=function(){oTap(b,n)};t.appendChild(b)})}
 function oTap(b,n){if(b.className.indexOf('done')>-1)return;
  if(n===LV[oi]){b.className='tile done';var sp=$('o_slots').children[oi];sp.textContent=n;sp.className='f';oi++;
-  if(oi===LV.length){$('o_f').className='fb g';$('o_f').textContent='أحسنتِ! هذا هو الانشطار الثنائي بالترتيب (ص 96).'}else{$('o_f').className='fb';$('o_f').textContent=''}}
- else{b.className='tile bad';setTimeout(function(){if(b.className.indexOf('done')<0)b.className='tile'},450);$('o_f').className='fb r';$('o_f').textContent='ليس بعد. فكّري: ماذا يحدث للمادة الوراثية قبل الانقسام؟'}}
+  if(oi===LV.length){$('o_f').className='fb g';$('o_f').textContent='أحسنتِ! هذه خطوات الانشطار الثنائي بالترتيب (ص 96).'}else{$('o_f').className='fb';$('o_f').textContent=''}}
+ else{b.className='tile bad';setTimeout(function(){if(b.className.indexOf('done')<0)b.className='tile'},450);$('o_f').className='fb r';$('o_f').textContent='ليس بعد. فكّري: ماذا يحدث للمادة الوراثية أولًا؟'}}
 $('o_re').onclick=oInit;oInit();
 
 /* matching */
-var PR=[['الخميرة','فطر وحيد الخلية يتكاثر بالتبرعم'],['الانشطار الثنائي','تنقسم فيه الخلية البكتيرية إلى خليتين متطابقتين'],['الاقتران','تنتقل فيه قطعة من المادة الوراثية بين خليتين بكتيريتين'],['الأبواغ','خلايا صغيرة تطلقها الفطريات وتنمو إلى فطر جديد']],mok,sel;
+var PR=[['الخميرة','فطر وحيد الخلية يتكاثر بالتبرعم'],['الانشطار الثنائي','تنقسم فيه الخلية إلى مخلوقين متماثلين'],['الاقتران','تلتحم فيه خليتان وتتبادلان المادة الوراثية ثم تنفصلان'],['الأبواغ','تحتوي المادة الوراثية، وتنمو إلى فطر جديد في بيئة مناسبة']],mok,sel;
 function mInit(){mok=0;sel=null;$('m_ok').textContent=0;$('m_f').className='fb';$('m_f').textContent='';
  var a=$('m_a'),b=$('m_b');a.innerHTML='';b.innerHTML='';
  shuf(PR.map(function(p,i){return i})).forEach(function(i){mk(a,PR[i][0],i,'a')});
@@ -172,10 +172,10 @@ function mTap(d){if(d.className.indexOf('done')>-1)return;
 $('m_re').onclick=mInit;mInit();
 
 /* sorting: budding vs binary fission */
-var SI=[['الخميرة','m'],['ينمو برعم صغير على الخلية الأم','m'],['البكتيريا تنقسم إلى خليتين متطابقتين','f'],['يتكوّن جدار فاصل في وسط الخلية','f'],['ينفصل البرعم ويصبح كائنًا جديدًا','m']],ss=null,sok;
+var SI=[['الخميرة','m'],['ينمو برعم صغير على الخلية الأم','m'],['ينتج مخلوقان متماثلان من انقسام الخلية','f'],['تتضاعف المادة الوراثية ثم تبدأ الخلية في الانقسام','f'],['ينفصل البرعم ويصبح كائنًا جديدًا','m']],ss=null,sok;
 function sInit(){sok=0;ss=null;$('s_ok').textContent=0;$('s_f').className='fb';$('s_f').textContent='';var t=$('s_items');t.innerHTML='';
  shuf(SI).forEach(function(it){var b=document.createElement('button');b.className='tile';b.style.fontSize='19px';b.textContent=it[0];b._k=it[1];b.onclick=function(){if(b.className.indexOf('done')>-1)return;if(ss)ss.className='tile';ss=b;b.className='tile sel'};t.appendChild(b)})}
-function sBin(k){if(!ss)return;if(ss._k===k){ss.className='tile done';ss=null;sok++;$('s_ok').textContent=sok;$('s_f').className='fb';$('s_f').textContent='';if(sok===5){$('s_f').className='fb g';$('s_f').textContent='أحسنتِ! الخميرة تتبرعم، والبكتيريا تنقسم انشطارًا ثنائيًا (ص 96–97).'}}
+function sBin(k){if(!ss)return;if(ss._k===k){ss.className='tile done';ss=null;sok++;$('s_ok').textContent=sok;$('s_f').className='fb';$('s_f').textContent='';if(sok===5){$('s_f').className='fb g';$('s_f').textContent='أحسنتِ! الخميرة تتبرعم، وتتكاثر معظم الطلائعيات والبكتيريا بالانشطار الثنائي (ص 96–97).'}}
  else{var b=ss;b.className='tile bad';setTimeout(function(){if(b.className.indexOf('done')<0)b.className='tile'},450);ss=null;$('s_f').className='fb r';$('s_f').textContent='فكّري: هل يخرج برعم صغير أم تنقسم الخلية إلى نصفين؟'}}
 var bb=document.querySelectorAll('#act [data-k]');for(var i=0;i<bb.length;i++)(function(b){b.onclick=function(){sBin(b.getAttribute('data-k'))}})(bb[i]);
 $('s_re').onclick=sInit;sInit();
@@ -215,8 +215,8 @@ ticket('e',[['ما المخلوقات الحية الدقيقة؟',['مخلوق�
 ['أين تعيش المخلوقات الحية الدقيقة؟',['في المختبر فقط','في أماكن كثيرة مثل التربة والماء','في الصحراء فقط'],1]],
  'ممتاز! أنتِ مستعدة للدرس.','جيد! سنكمل ما بدأتِ به في الدرس.','لا بأس، سنتعلّم ذلك معًا في هذا الدرس.');
 ticket('x',[['كيف تتكاثر الخميرة؟',['بالتبرعم','بالأزهار','بالجذور'],0],
-['ماذا ينتج عن الانشطار الثنائي للخلية البكتيرية؟',['خلية واحدة أكبر','خليتان جديدتان متطابقتان','عشر أبواغ'],1],
-['ماذا ينتقل بين بكتيريتين في الاقتران؟',['ضوء الشمس','الماء','قطعة من المادة الوراثية'],2]],
+['ماذا ينتج عن الانشطار الثنائي؟',['مخلوق واحد أكبر','مخلوقان جديدان متماثلان','عشر أبواغ'],1],
+['ماذا يحدث في الاقتران؟',['تنقسم الخلية إلى ثلاث خلايا','تتبادل خليتان المادة الوراثية','ينمو برعم على الخلية'],1]],
  'رائع! أنتِ عالمة صغيرة.','أحسنتِ! راجعي السؤال الذي أخطأتِ فيه.','لا بأس، شاهدي الدرس مرة أخرى وجرّبي من جديد.');
 })();
 </script></body></html>
