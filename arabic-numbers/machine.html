@@ -93,6 +93,10 @@ input[type=range]{width:100%;margin:14px 0 6px;accent-color:var(--blue);height:2
 .legend span{display:inline-flex;align-items:center;gap:6px}
 .legend i{width:16px;height:16px;border-radius:5px;display:inline-block}
 .speak{border:0;background:rgba(255,255,255,.22);color:#fff;border-radius:10px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:17px}
+.map .labels{font-size:13px;line-height:1.35;gap:0}
+.map .labels div{padding:0 2px;overflow-wrap:anywhere}
+.map .labels .rg{display:inline-block;direction:rtl;unicode-bidi:isolate;color:#7A8AA3;font-weight:700}
+@media(max-width:420px){.map .labels{font-size:11.5px}.map .seg div{font-size:14px}}
 </style></head><body>
 <header class="hdr"><div class="in">
  <div><h1>⚙️ آلة العدد والمعدود</h1><div class="sub">اختر معدوداً، وحرّك العدد، وشاهد القاعدة تعمل أمامك</div></div>
@@ -174,7 +178,7 @@ W.ZONES={
  2:{name:'المخالفة',range:'٣ – ١٠',col:'#1F5FBF',ico:'🔄'},
  3:{name:'المركَّب',range:'١١ – ١٩',col:'#7E3FBF',ico:'🧩'},
  4:{name:'العقود',range:'٢٠ – ٩٩',col:'#E58A12',ico:'🔟'},
- 5:{name:'المئة والألف',range:'١٠٠ فأكثر',col:'#E8508F',ico:'💯'}
+ 5:{name:'المئة والألف',range:'١٠٠ وأكثر',col:'#E8508F',ico:'💯'}
 };
 /* build phrase pieces */
 W.phrase=function(n,nn){
@@ -329,7 +333,7 @@ function render(){
 function SMstem(k){return phrase(k,noun('book')).num.replace(/ةَ$/,'')}
 function SFform(k){return phrase(k,noun('apple')).num}
 function pos(k){ // % from the right edge of the bar
- const w=[8,16,20,36,20];const edges=[0];w.reduce((a,b)=>(edges.push(a+b),a+b),0);
+ const w=[20,20,20,20,20];const edges=[0];w.reduce((a,b)=>(edges.push(a+b),a+b),0);
  let z=zoneOf(k);const lo={1:1,2:3,3:11,4:20,5:100}[z],hi={1:3,2:11,3:20,4:100,5:1001}[z];
  let f=(k-lo)/(hi-lo);if(z===5)f=k>=1000?.9:.15;return Math.max(1,Math.min(98,edges[z-1]+w[z-1]*(z===5?f:f)))
 }
@@ -343,9 +347,9 @@ document.addEventListener('DOMContentLoaded',()=>{
  el('rng').oninput=e=>{n=+e.target.value;render()};
  el('flip').onclick=()=>{const other=NOUNS.filter(x=>x.g!==cur.g);cur=other[Math.floor(Math.random()*other.length)];sfx('tap');render()};
  // map
- const names=[1,2,3,4,5].map(z=>ZONES[z]);const wd=[8,16,20,36,20];
+ const names=[1,2,3,4,5].map(z=>ZONES[z]);const wd=[20,20,20,20,20];
  el('seg').innerHTML=names.map((z,i)=>'<div style="width:'+wd[i]+'%;background:'+z.col+'" data-z="'+(i+1)+'">'+z.ico+'</div>').join('');
- el('labels').innerHTML=names.map((z,i)=>'<div style="width:'+wd[i]+'%">'+z.name+'<br>'+z.range+'</div>').join('');
+ el('labels').innerHTML=names.map((z,i)=>'<div style="width:'+wd[i]+'%">'+z.name+'<br><span class="rg">'+z.range+'</span>'+'</div>').join('');
  $$('#seg div').forEach(d=>d.onclick=()=>{const z=+d.dataset.z;setN({1:1,2:3,3:13,4:25,5:100}[z])});
  const m=el('mute');m.textContent=isMuted()?'🔇':'🔊';m.onclick=()=>toggleMute(m);
  // speech
